@@ -32,8 +32,8 @@ if [ "$1" == "sys" ]; then
     echo -e "Processor Name:\t\t$(awk -F':' '/^model name/ {print $2}' /proc/cpuinfo | uniq | sed -e 's/^[ \t]*//')"
     #prints active user
     echo -e "Active User:\t\t$USER"
-#prints ip address
-    echo -e "Main System IP:\t\t"
+    #prints ip address
+    echo -e "Main System IP:\t\t"$(hostname -I)
 
 #mem
 elif [ "$1" == "mem" ]; then

@@ -1,0 +1,37 @@
+Connor Palmira
+5007380152
+CS 370 Section 1001
+
+From the top display, answer the following (5 pts):
+------------------------------------------------------
+How much memory is free in the system?
+Of the 1941 total MiB memory, 3640 MiB is free in the system.
+
+Which process is taking more CPU?
+The process that is taking the most CPU is the gnome-shell.
+
+Which process has got maximum memory share?
+The process that is taking the most CPU is FireFox.
+
+
+Answer the following questions (4 pts):
+------------------------------------------------------
+What is the output of [pstree] (description)?
+[pstree] outputs a visual representation of the hierarchy of
+processes in the system in the form of a branching tree.
+
+What is the output of [ps -aux] (description)?
+[ps -aux] outputs the details of every process in the system,
+including memory and cpu usage.
+
+
+Execute a CPU bound program (3 pts):
+------------------------------------------------------
+Describe the effect of their CPU share using the top display and comment.
+The CPU share was at 98% for the duration of the program.
+
+
+Execute an I/O bound program (3 pts):
+------------------------------------------------------
+Describe the effect of their CPU share using the top display and comment.
+The CPU share stayed in the range of 55-60% for the duration of the program.

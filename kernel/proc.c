@@ -693,3 +693,43 @@ procdump(void)
     printf("\n");
   }
 }
+
+/// @brief Prints the system info
+/// @param  none
+/// @return Returns 0 for success
+int sysinfo(void)
+{
+  //Prints uptime
+  uint up;
+  acquire(&tickslock);
+  up = ticks;
+  release(&tickslock);
+  int upBefore = up / 100;
+  int upAfter = (up % 100) * 1000;
+  printf("Uptime:        %d.%ds\n", upBefore, upAfter);
+
+  //Prints total memory
+  int totalMem = PHYSTOP - KERNBASE;
+  printf("Total Memory:  %d\n", totalMem);
+
+  //Prints used memory
+  int runningSum = 0;
+  int numProcesses = 0;
+  struct proc *p;
+  for(p = proc; p < &proc[NPROC]; p++){
+    acquire(&p->lock);
+    if(p->state == RUNNING || p->state == RUNNABLE || p->state == SLEEPING)
+    {
+      runningSum += p->sz;
+      numProcesses++;
+    }
+
+    release(&p->lock);
+  }
+  printf("Used Memory:   %d\n", runningSum);
+
+  //Prints number of processes
+  printf("Process Count: %d\n", numProcesses);
+
+  return 0;
+}

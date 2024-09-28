@@ -1,0 +1,8 @@
+Which program has mostly voluntary context switches and which has mostly nonvoluntary context 
+switches and why?
+cpu.c was only nonvoluntary context switches while cpu-print.c was a mix of both but still 
+majority of nonvolitary context switches. cpu-print.c had voluntary context switches and more
+nonvolitary context switches because it was getting blocked by I/O operations.
+
+Which program uses more system time and why?
+cpu-print.c also had more system time because it was performing I/O operations and cpu.c was not.

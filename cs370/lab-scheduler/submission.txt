@@ -1,0 +1,29 @@
+Section 1 - CPU Information
+Model name: Intel(R) Celeron(R) N4120 CPU @ 1.10 GHz
+CPU family: 6
+Model: 122
+Thread(s) per core: 1
+Core(s) per socket: 4
+Socket(s): 1
+Stepping: 8
+BogoMIPS: 2188.80
+
+Section  2 - Scheduling Policies
+N: SCHED_NORMAL     : prio_min 0, prio_max 0
+F: SCHED_FIFO       : prio_min 1, prio_max 99
+R: SCHED_RR         : prio_min 1, prio_max 99
+B: SCHED_BATCH      : prio_min 0, prio_max 0
+I: SCHED_ISO        : policy not implemented
+D: SCHED_IDLEPRIO   : prio_min 0, prio_max 0
+
+Section 3 - Execution Results
+A:
+The typical time was 2,266,975 milliseconds.
+For the CPU history: CPU1 was at 82.6%, CPU2 was at 67.6%, CPU3 was at 83.0%, and CPU4 was at 99.0%.
+B:
+The typical time was 3,785,550 milliseconds.
+For the CPU history: CPU1 was at 98%, CPU2 was at 97.0%, CPU3 was at 97.0%, and CPU4 was at 100.0%.
+
+Section 4 - Processor Affinity
+Execution B was degraded because the priority schedule was less optimal than it was for Execution A.
+Using a different priority schedule would be advantageous when you specifally need to do multiple tasks at once, such as when you need to process audio while running background tasks.

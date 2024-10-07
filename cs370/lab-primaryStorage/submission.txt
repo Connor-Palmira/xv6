@@ -1,0 +1,12 @@
+Without applications running:
+-Memory Used: 968 megabytes
+-Memory Shared: 34 megabytes
+-Memory Buffered/cached: 760 megabytes
+
+With application running:
+-Memory Used: 2821 megabytes
+-Memory Shared: 105 megabytes
+-Memory Buffered/cached: 2425 megabytes
+
+The more applications are running, the more memory is accessed so all of
+the numbers for memory usage, sharing, and in the buffer/cache rise.

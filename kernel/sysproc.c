@@ -97,3 +97,21 @@ sys_sysinfo(void)
 {
   return sysinfo();
 }
+
+uint64
+sys_forkBQ(void)
+{
+  int x;
+  argint(0, &x);
+  return forkBQ(x);
+}
+
+uint64
+sys_debug(void)
+{
+  int x;
+  argint(0, &x);
+  debug(x);
+
+  return 0;
+}

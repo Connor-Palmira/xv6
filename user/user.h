@@ -23,6 +23,8 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int sysinfo(void);
+int forkBQ(int rl);
+void debug(int enable);
 
 // ulib.c
 int stat(const char*, struct stat*);

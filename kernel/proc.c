@@ -26,6 +26,9 @@ extern char trampoline[]; // trampoline.S
 // must be acquired before any p->lock.
 struct spinlock wait_lock;
 
+//If 0, debug mod is off -- if 1, debug mode is on
+int mode = 0;
+
 // Allocate a page for each process's kernel stack.
 // Map it high in memory, followed by an invalid
 // guard page.
@@ -311,6 +314,7 @@ fork(void)
   safestrcpy(np->name, p->name, sizeof(p->name));
 
   pid = np->pid;
+  np->runLength = 0; // For Project #3
 
   release(&np->lock);
 
@@ -455,12 +459,24 @@ scheduler(void)
     intr_on();
 
     int found = 0;
-    for(p = proc; p < &proc[NPROC]; p++) {
+
+    /*Binary Queue Scheduler*/
+    for(p = proc; p < &proc[NPROC]; p++) // High Priority
+    {
       acquire(&p->lock);
-      if(p->state == RUNNABLE) {
+      while(p->state == RUNNABLE && p->runLength > 0)
+      {
         // Switch to chosen process.  It is the process's job
         // to release its lock and then reacquire it
         // before jumping back to us.
+
+        //For Project #3 -- Binary Queue
+        if(mode == 1)
+        {
+          printf("High Priority Queue. PID : %d    Remaining Run Length: %ld\n", p->pid, p->runLength);
+        }
+        p->runLength = p->runLength - 1;
+        
         p->state = RUNNING;
         c->proc = p;
         swtch(&c->context, &p->context);
@@ -472,6 +488,61 @@ scheduler(void)
       }
       release(&p->lock);
     }
+    for(p = proc; p < &proc[NPROC]; p++) // Low Priority
+    {
+      acquire(&p->lock);
+
+      if(p->state == RUNNABLE && p->runLength == 0)
+      {
+        // Switch to chosen process.  It is the process's job
+        // to release its lock and then reacquire it
+        // before jumping back to us.
+
+        //For Project #3 -- Binary Queue
+        if(mode == 1)
+        {
+          printf("Low Priority Queue. PID : %d\n", p->pid);
+        }
+
+        p->state = RUNNING;
+        c->proc = p;
+        swtch(&c->context, &p->context);
+
+        // Process is done running for now.
+        // It should have changed its p->state before coming back.
+        c->proc = 0;
+        found = 1;
+      }
+
+      release(&p->lock);
+    }
+
+
+    /* Round Robin
+    for(p = proc; p < &proc[NPROC]; p++) {
+      acquire(&p->lock);
+      if(p->state == RUNNABLE) {
+        // Switch to chosen process.  It is the process's job
+        // to release its lock and then reacquire it
+        // before jumping back to us.
+
+        //For Project #3 -- Round Robin
+        if(mode == 1)
+        {
+          printf("PID of Scheduled Process: %d\n", p->pid);
+        }
+
+        p->state = RUNNING;
+        c->proc = p;
+        swtch(&c->context, &p->context);
+
+        // Process is done running for now.
+        // It should have changed its p->state before coming back.
+        c->proc = 0;
+        found = 1;
+      }
+      release(&p->lock);
+    }*/
     if(found == 0) {
       // nothing to run; stop running on this core until an interrupt.
       intr_on();
@@ -732,4 +803,76 @@ int sysinfo(void)
   printf("Process Count: %d\n", numProcesses);
 
   return 0;
+}
+
+/* forkBQ(int)
+* 
+* Forks the current process, setting the runLength in the child
+* process to the rl parameter.
+* Returns the PID of the child in the parent, and 0 in the child.
+* Less than zero on error in the parent.
+*/
+int forkBQ(int rl)
+{
+  if(rl < 0 || rl > 32)
+    return -1;
+
+  int i, pid;
+  struct proc *np;
+  struct proc *p = myproc();
+
+  // Allocate process.
+  if((np = allocproc()) == 0){
+    return -1;
+  }
+
+  // Copy user memory from parent to child.
+  if(uvmcopy(p->pagetable, np->pagetable, p->sz) < 0){
+    freeproc(np);
+    release(&np->lock);
+    return -1;
+  }
+  np->sz = p->sz;
+
+  // copy saved user registers.
+  *(np->trapframe) = *(p->trapframe);
+
+  // Cause fork to return 0 in the child.
+  np->trapframe->a0 = 0;
+
+  // increment reference counts on open file descriptors.
+  for(i = 0; i < NOFILE; i++)
+    if(p->ofile[i])
+      np->ofile[i] = filedup(p->ofile[i]);
+  np->cwd = idup(p->cwd);
+
+  safestrcpy(np->name, p->name, sizeof(p->name));
+
+  pid = np->pid;
+  np->runLength = rl;
+
+  release(&np->lock);
+
+  acquire(&wait_lock);
+  np->parent = p;
+  release(&wait_lock);
+
+  acquire(&np->lock);
+  np->state = RUNNABLE;
+  release(&np->lock);
+
+  return pid;
+}
+
+/* sys_debug(int)
+* Sets the system level debug to the enable parameter.
+* enable != 0 --> debug mode on
+* enable = 0 --> debug mode off
+*/
+void debug(int enable)
+{
+  if(enable != 0 && enable != 1)
+    return;
+  
+  mode = enable;
 }

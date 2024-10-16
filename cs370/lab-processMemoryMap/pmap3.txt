@@ -1,0 +1,25 @@
+000059731b5c1000      4K r---- memAddr
+000059731b5c2000      4K r-x-- memAddr
+000059731b5c3000      4K r---- memAddr
+000059731b5c4000      4K r---- memAddr
+000059731b5c5000      4K rw--- memAddr
+000059731d009000    136K rw---   [ anon ]
+00007ff35fa00000   3908K rw---   [ anon ]
+00007ff35fe00000    160K r---- libc.so.6
+00007ff35fe28000   1568K r-x-- libc.so.6
+00007ff35ffb0000    316K r---- libc.so.6
+00007ff35ffff000     16K r---- libc.so.6
+00007ff360003000      8K rw--- libc.so.6
+00007ff360005000     52K rw---   [ anon ]
+00007ff36019d000     12K rw---   [ anon ]
+00007ff3601af000      8K rw---   [ anon ]
+00007ff3601b1000      4K r---- ld-linux-x86-64.so.2
+00007ff3601b2000    172K r-x-- ld-linux-x86-64.so.2
+00007ff3601dd000     40K r---- ld-linux-x86-64.so.2
+00007ff3601e7000      8K r---- ld-linux-x86-64.so.2
+00007ff3601e9000      8K rw--- ld-linux-x86-64.so.2
+00007fffc97bb000   3920K rw---   [ stack ]
+00007fffc9bb9000     16K r----   [ anon ]
+00007fffc9bbd000      8K r-x--   [ anon ]
+ffffffffff600000      4K --x--   [ anon ]
+ total            10384K

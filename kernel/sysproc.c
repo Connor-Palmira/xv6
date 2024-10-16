@@ -5,6 +5,7 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "vmstat.h"
 
 uint64
 sys_exit(void)
@@ -113,5 +114,25 @@ sys_debug(void)
   argint(0, &x);
   debug(x);
 
+  return 0;
+}
+
+uint64 sys_vmstats(void)
+{
+  uint64 addr;
+  struct vmstat stats;
+  struct proc *p;
+  argaddr(0, &addr);
+  p = myproc();
+  if(p == 0)
+    return -1;
+  stats.total_memory = PHYSTOP - KERNBASE;
+  stats.free_memory = get_free_mem_count() * PGSIZE;
+  stats.used_memory = stats.total_memory - stats.free_memory;
+  stats.resident_pages = count_resident_pages(p) * PGSIZE;
+  stats.process_memory = p->sz;
+  if(copyout(myproc()->pagetable, addr, (char *)&stats,
+                                          sizeof(stats)) < 0)
+    return -1;
   return 0;
 }

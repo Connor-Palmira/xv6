@@ -876,3 +876,17 @@ void debug(int enable)
   
   mode = enable;
 }
+
+/* For Project #4 */
+int count_resident_pages(struct proc *p)
+{
+  int count = 0;
+  pte_t *pte;
+  uint64 va;
+  for(va = 0; va < p->sz; va += PGSIZE){
+    pte = walk(p->pagetable, va, 0);
+    if(pte && (*pte & PTE_V) && (*pte & PTE_U))
+      count++;
+  }
+  return count;
+}

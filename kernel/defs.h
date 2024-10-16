@@ -8,6 +8,11 @@ struct spinlock;
 struct sleeplock;
 struct stat;
 struct superblock;
+struct vmstat;
+
+// For Project #4
+uint64 get_free_mem_count(void);
+int count_resident_pages(struct proc*);
 
 // bio.c
 void            binit(void);
@@ -109,6 +114,7 @@ void            procdump(void);
 int            sysinfo(void);
 int             forkBQ(int);
 void             debug(int);
+int             vmstats(struct vmstat*);
 
 // swtch.S
 void            swtch(struct context*, struct context*);

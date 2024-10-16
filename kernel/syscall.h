@@ -23,3 +23,4 @@
 #define SYS_sysinfo 22
 #define SYS_forkBQ 23
 #define SYS_debug 24
+#define SYS_vmstats 25

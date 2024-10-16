@@ -104,6 +104,7 @@ extern uint64 sys_close(void);
 extern uint64 sys_sysinfo(void);
 extern uint64 sys_forkBQ(void);
 extern uint64 sys_debug(void);
+extern uint64 sys_vmstats(void);
 
 // An array mapping syscall numbers from syscall.h
 // to the function that handles the system call.
@@ -132,6 +133,7 @@ static uint64 (*syscalls[])(void) = {
 [SYS_sysinfo] sys_sysinfo,
 [SYS_forkBQ] sys_forkBQ,
 [SYS_debug] sys_debug,
+[SYS_vmstats] sys_vmstats,
 };
 
 void

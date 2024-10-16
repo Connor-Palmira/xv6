@@ -39,3 +39,4 @@ entry("uptime");
 entry("sysinfo");
 entry("forkBQ");
 entry("debug");
+entry("vmstats");

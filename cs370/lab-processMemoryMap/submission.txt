@@ -1,0 +1,15 @@
+Memory Categories
+After using pmap when bogusArr[] is first global and then using pmap when bogusArr[] is defined in main, the following changes happened:
+-The 3904K that was dynamically allocated is no longer there when bogusArr[] is defined in main.
+-When bogusArr[] is globally defined, there is 132K for the process stack, but when it is defined in main, there is 3920K for the process stack.
+-The total amount of memory allocated when bogusArr[] is dynamically allocated (pmap says anon) is 6592K and when bogusArr[] is defined in main it is 6476K.
+These changes happened because instead of being defined as static memory, now bogusArr[] is stored on the stack because they are initalized in different segments.
+
+Call Frame
+afunc() is always the same size, regardless of where bogusArr[] is defined.
+afunc() is 10 bytes.
+I determined the size of afunc() by putting a breakpoint at afunc() in gdb, running until the breakpoint, and then getting the info from the frame. Then, I subtracted the rbp from the rsp to get the size of the function.
+
+Dynamic Memory Allocation
+The only difference is when adding bogusArrDynamic[] is that there is an extra line of dynamically allocated data with 3908K, which also changed the total data from 6476K to 10384K.
+This change happened because I added bogusArrDyanmic[] of the same size as bogusArr[], and since that what defined dynamically, there was more dynamic data (pmap says anon).

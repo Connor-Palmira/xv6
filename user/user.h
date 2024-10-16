@@ -1,4 +1,5 @@
 struct stat;
+struct vmstat;
 
 // system calls
 int fork(void);
@@ -25,6 +26,7 @@ int uptime(void);
 int sysinfo(void);
 int forkBQ(int rl);
 void debug(int enable);
+int vmstats(struct vmstat*);
 
 // ulib.c
 int stat(const char*, struct stat*);

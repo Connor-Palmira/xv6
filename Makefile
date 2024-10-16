@@ -143,6 +143,7 @@ UPROGS=\
 	$U/_time\
 	$U/_info\
 	$U/_schedTest\
+	$U/_myvmstats\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

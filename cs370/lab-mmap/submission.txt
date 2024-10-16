@@ -1,0 +1,16 @@
+Example 1 - Memory Allocation
+The program defines virtual memory worth 10 integers through the use of an integer pointer.
+The program then assigns a number (10-19) for each integer in the pointer and then prints the
+number assigned in order.
+
+Example 2 - Read File
+The program reads the filepath from the command line and then prints its information.
+In this case, the program prints the name ("file2.txt"), the size in bytes (12), and the contents ("Hello World").
+
+Example 3 - Write File
+The program reads the filepath from the command line, prints its information, then changes its information.
+In this case, the program prints the original contents of the file ("Hello World) and then prints the contents after changing the file's contents to be the original content backwards ("Hello World" gets changed to "dlroW olleH").
+
+Example 4 - Inter-process Communication
+The program defines virtual memory worht 7 integers through the use of an integer pointer, assigns them the values 1-7, and the prints the values as "the initial values."
+The program then forks to a child process (the parent process waits for the child process) where the child process multiplies each value in the pointer array by 10, and then the parent process prints the changed values (10, 20, ... 70).

@@ -60,6 +60,9 @@ int main()
     printf("Resident pages memory: %ld\n", stats.resident_pages);
     printf("Process memory: %ld\n", stats.process_memory);
 
+    //Deallocation
+    free(ptr);
+
     //End of program
     exit(0);
 }

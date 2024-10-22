@@ -1,0 +1,20 @@
+The server program first creates a socket and then binds the socket to an IP address.
+After doing so, it will wait for a client program to start running. When a client
+program starts running, it will print the IP address of the client program and whenever
+the user enters something into the client program, the server program will print a cow
+saying what the user entered into the client program.
+
+The client program first connects to the socket from the server program. Then, the client
+program will ask for user input over and over until the user enters ":exit" to exit the
+client program.
+
+When creating a client program, it connects with an IP address of 0.0.0.0, but if a second
+client program is created, it connects with an IP address of 127.0.0.1. The reason
+the first client program is 0.0.0.0 is probably because it uses a virtual address and the
+first avaiable slot was at 0. The TCP/IP port of the first client program was 0 while the second
+client program/s was 56,284.
+
+One advantage of using sockets is the connection between the server and the client can be used
+for communication such as texting or social media.
+
+One disadvantage of using sockets is that it needs a lot of resources to manage the server.

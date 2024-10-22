@@ -1,0 +1,27 @@
+free = 4,136,328
+(4,136,328 * 200) / 4096 = 201,969.1406
+
+Command being timed: "./memA"
+	User time (seconds): 8.45
+	System time (seconds): 10.83
+	Maximum resident set size (kbytes): 3237120
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 809128
+	Voluntary context switches: 0
+	Involuntary context switches: 149
+
+Command being timed: "./memB"
+	User time (seconds): 45.94
+	System time (seconds): 4.06
+	Maximum resident set size (kbytes): 3237248
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 809125
+	Voluntary context switches: 1
+	Involuntary context switches: 495
+
+memB takes about 5 times as longer as memA does in user time (45 seconds compared to 8).
+However, memB takes around half as long in system time then memA does (4 seconds compared to 10).
+Both memA and memB have around the same maximum resident set size, with memB having a slight increase.
+Neither memA nor memB had any any major faults and they both had around 800,000 minor faults.
+memA didn't have any voluntary context switches while memB had only 1.
+Finally, memB had over 3 times as many involuntary context switches compared to memA (495 compared to 149).

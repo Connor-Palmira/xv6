@@ -1,0 +1,11 @@
+read-write-1
+
+The program's parent function prints the 1-9 while the child function prints the squares of the parent's values. The child process and the parent process alternate to print one of the values and then the other's value until they reach their limit. (i.e. Parent prints 2, child then prints 4, then back to parent).
+
+When removing the sleep system call from only the parent process, the output now prints that the child process's value is 0 10 times. Then it prints the parent process's value correctly without alternating to the child process.
+
+When using the spinlock approach, the output changes to print all of the parent process's output first (excluding the "parent is done" statement). Then it prints the child process's value except all of the values are 81. Finally, it prints the "child is done" statement followed by the "parent is done" statement. This is not better than the previous approach because it makes the child process's value be incorrect.
+
+read-write-2
+
+This program will work when there are multiple readers or writers because of the buffer. The buffer makes sure that, even if the programs are out of sync, that the output will stay the same. The output that I got was inconsistent with how fast it switched between the reader and the writer, but the output for each of them stayed the same.

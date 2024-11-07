@@ -1,0 +1,14 @@
+Filesystem tmpfs
+Size in 1-K Blocks: 813,132
+Used in megabytes: 2
+Available in megabytes: 793
+Use%: 1%
+
+Text file that has "hello world" for 2,000 lines
+Size in 1-K Blocks: 25,623,780
+Used in megabytes: 15,160
+Available in megabytes: 8,569
+Use%: 64%
+
+The size in 1-K blocks was multiplied by around 40x. The megabytes in use was multiplied by 7,500.
+The available megabytes was multiplied by around 11x and finally the use percentage was 64x more.

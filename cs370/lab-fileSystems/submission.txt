@@ -1,0 +1,30 @@
+Inodes for file.txt
+Total number of inodes: 1,638,400
+Used inodes: 191,573
+Free inodes: 1,446,827
+Percentage of inodes used: 12%
+
+Blocksize of system: 4096
+
+Inode number of file.txt: 397,919
+
+File information of file.txt
+File type: ASCII text
+File mode (octal): 664
+File flags: --------------e-------
+File links: -rw-rw-r--
+Inode checksum: 0xe2d5797a
+Extents: 1
+
+Results of "ls -li" for file.txt and hi.txt
+file.txt has an inode number of 397,919 and permissions of "-rw-rw-r--" with the name "file.txt".
+hi.txt has an inode number of 397,914 and permissions of "lrwxrwxrwx" with the name "hi.txt -> file.txt".
+
+Results of "ls -li" for file1.txt and bye.txt
+file1.txt has an inode number of 398,003 and permissions of "-rw-rw-r--" with the name "file1.txt".
+bye.txt has an inode number of 398,003 and permission of "-rw-rw-r--" with the name "bye.txt".
+They are both the same with different names for the files.
+
+Difference between soft links and hard links
+A hard link is when two files share the same inode number. This makes it so that they are exact copies of each other.
+A soft link is a file is connected to another file. They have different inode numbers.
